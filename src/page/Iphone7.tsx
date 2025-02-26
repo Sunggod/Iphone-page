@@ -2,17 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import BannerSection from '../components/BannerSection';
-
-export interface iPhoneLandingPageProps {
-  imagePath: string;
-  rightBanner?: string;
-  leftBanner?: string;
-  mainBanner?: string;
-}
-const fadeInVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
-};
+import { fadeInVariants } from '../constants/animation';
+import { iPhoneLandingPageProps } from '../types';
 
 const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
   imagePath,
@@ -25,7 +16,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
   
   const { scrollY } = useScroll();
   
-  // Efeitos de animação aprimorados para o iPhone
   const phoneY = useTransform(scrollY, [0, 800], [0, 100]);
   const phoneRotate = useTransform(scrollY, [0, 800], [0, 8]);
   const phoneShadow = useTransform(
@@ -36,7 +26,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
   const phoneScale = useTransform(scrollY, [0, 400], [1, 0.9]);
   
   useEffect(() => {
-    // Definir timeout para melhorar a performance
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 300);
@@ -46,8 +35,7 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
   
   return (
     <div className="flex flex-col min-h-screen bg-black text-white antialiased">
-      {/* Seção Hero com iPhone */}
-      <div className="flex flex-col items-center justify-center flex-grow pt-24 relative overflow-hidden pb-96">
+      <div className="flex flex-col items-center justify-center flex-grow pt-24 relative overflow-hidden pb-10">
         <motion.div
           ref={phoneRef}
           className="w-full max-w-lg mx-auto"
@@ -61,8 +49,7 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
             scale: phoneScale,
           }}
         >
-          <div className="relative mx-auto w-full max-w-xs">
-            {/* Reflexo/Sombra do iPhone */}
+          <div className="relative mx-auto w-full h-[500px] max-w-xs">
             <motion.div
               className="absolute inset-0 rounded-3xl transform rotate-12 scale-90 translate-y-4 blur-md opacity-20"
               animate={{
@@ -85,23 +72,11 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
                 transition: { duration: 0.3 }
               }}
             />
-            
-            <motion.div
-              className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0"
-              animate={{
-                opacity: [0, 0.3, 0],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
+           
           </div>
         </motion.div>
       </div>
 
-      {/* Seta de scroll */}
       <motion.div
         className="fixed bottom-8 w-full flex justify-center pb-4 z-50"
         initial="hidden"
@@ -110,7 +85,7 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
         transition={{ delay: 1.2 }}
       >
         <motion.button
-          className="text-white bg-gray-800/40 backdrop-blur-md p-2 rounded-full"
+          className="text-white "
           whileHover={{ scale: 1.1, backgroundColor: 'rgba(75, 85, 99, 0.5)' }}
           whileTap={{ scale: 0.9 }}
           animate={{
@@ -126,7 +101,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
         </motion.button>
       </motion.div>
 
-      {/* Seção de Banners com Parallax */}
       <BannerSection
         rightBanner={rightBanner}
         leftBanner={leftBanner}

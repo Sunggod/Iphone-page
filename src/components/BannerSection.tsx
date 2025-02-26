@@ -10,6 +10,7 @@ const BannerSection: React.FC<{
   
   const leftBannerX = useTransform(scrollY, [0, 800], [0, -80]);
   const rightBannerX = useTransform(scrollY, [0, 800], [0, 80]);
+  const cameraX = useTransform(scrollY,  [0, 500], [0, 80]);
   const mainBannerY = useTransform(scrollY, [0, 800], [0, 50]);
   const mainScale = useTransform(scrollY, [0, 800], [1, 1.08]);
   const mainOpacity = useTransform(scrollY, [0, 200, 600], [0.6, 1, 0.8]);
@@ -57,6 +58,41 @@ const BannerSection: React.FC<{
           src={mainBanner} 
           alt="Banner principal" 
           className="w-full h-auto object-cover"
+        />
+      </motion.div>
+      <motion.div
+        className="w-full m-52"
+          style={{ x: cameraX }}
+          
+      >
+        <img 
+          src='camera.png'
+          alt="Banner principal" 
+          className="w-full h-auto object-cover "
+        />
+      </motion.div>
+      <div className="relative h-full w-full bg-[#121212]">
+        <motion.div
+          className="w-full mt-52"
+            style={{ x: cameraX }}
+            
+        >
+          <img 
+            src='cameraplus.png'
+            alt="Banner principal" 
+            className="w-full h-auto object-cover "
+          />
+      </motion.div>
+      </div>
+      <motion.div
+        className="w-full m-52"
+          style={{ x: cameraX }}
+          
+      >
+        <img 
+          src='display.png'
+          alt="Banner principal" 
+          className="w-full h-auto object-cover "
         />
       </motion.div>
     </motion.div>
