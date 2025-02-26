@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../components/Navbar'; // ajuste o caminho conforme a estrutura do seu projeto
+import Navbar from '../components/Navbar'; 
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ const Layout: React.FC<LayoutProps> = ({ children, logoPath }) => {
   return (
     <>
       <Navbar logoPath={logoPath} />
-      <main className="pt-20 bg-black">
+      <main >
         {children}
       </main>
     </>
