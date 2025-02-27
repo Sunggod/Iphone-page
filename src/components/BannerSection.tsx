@@ -31,7 +31,7 @@ const BannerSection: React.FC<BannerSectionProps> = ({
   const leftRotate = useTransform(scrollYProgress, [0, 1], [5, -5]);
   const rightRotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
   
-  // Escala para efeito de zoom
+  // Escala efeito de zoom
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.05, 1]);
   
   return (
@@ -39,7 +39,6 @@ const BannerSection: React.FC<BannerSectionProps> = ({
       ref={sectionRef}
       className="min-h-screen relative bg-gradient-to-b from-black to-gray-900 overflow-hidden flex flex-col items-center justify-center py-20"
     >
-      {/* Texto de introdução com parallax */}
       <motion.div 
         className="text-center mb-16 px-4"
         style={{ 
@@ -54,9 +53,7 @@ const BannerSection: React.FC<BannerSectionProps> = ({
         </p>
       </motion.div>
       
-      {/* Container dos banners com efeito parallax */}
       <div className="relative w-full max-w-6xl mx-auto px-4">
-        {/* Banner principal */}
         <motion.div
           className="relative z-20 mb-12"
           style={{
@@ -71,11 +68,11 @@ const BannerSection: React.FC<BannerSectionProps> = ({
             className="w-full rounded-xl shadow-2xl"
           />
           
-          {/* Overlay com informações */}
           <motion.div
             className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 rounded-b-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            
             transition={{ delay: 0.3, duration: 0.8 }}
             viewport={{ once: true }}
           >
@@ -86,9 +83,7 @@ const BannerSection: React.FC<BannerSectionProps> = ({
           </motion.div>
         </motion.div>
         
-        {/* Banners laterais */}
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Banner esquerdo */}
           <motion.div
             className="flex-1 relative"
             style={{
@@ -103,7 +98,6 @@ const BannerSection: React.FC<BannerSectionProps> = ({
               className="w-full rounded-xl shadow-xl"
             />
             
-            {/* Overlay com informações */}
             <motion.div
               className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 rounded-b-xl"
               initial={{ opacity: 0, y: 10 }}
@@ -118,7 +112,6 @@ const BannerSection: React.FC<BannerSectionProps> = ({
             </motion.div>
           </motion.div>
           
-          {/* Banner direito */}
           <motion.div
             className="flex-1 relative"
             style={{
@@ -133,7 +126,6 @@ const BannerSection: React.FC<BannerSectionProps> = ({
               className="w-full rounded-xl shadow-xl"
             />
             
-            {/* Overlay com informações */}
             <motion.div
               className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 rounded-b-xl"
               initial={{ opacity: 0, y: 10 }}
@@ -149,7 +141,6 @@ const BannerSection: React.FC<BannerSectionProps> = ({
           </motion.div>
         </div>
         
-        {/* Botão de ação */}
         <motion.div
           className="mt-16 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -161,14 +152,13 @@ const BannerSection: React.FC<BannerSectionProps> = ({
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-medium tracking-wider"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            transition={{ type: "spring", stiffness: 1000, damping: 17 }}
           >
             Conheça mais
           </motion.button>
         </motion.div>
       </div>
       
-      {/* Partículas/reflexos de luz */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(10)].map((_, i) => (
           <motion.div

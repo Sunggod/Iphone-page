@@ -15,7 +15,7 @@ interface NavbarProps {
   logoPath: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ logoPath }) => {
+const Navbar: React.FC<NavbarProps> = ({ logoPath = 'logo.png' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
@@ -63,9 +63,9 @@ const Navbar: React.FC<NavbarProps> = ({ logoPath }) => {
         whileTap={{ scale: 0.95 }}
       >
         <img
-          src={logoPath}
+          src={logoPath ? 'logo.png' : undefined}
           alt="Apple Logo"
-          className="w-5 h-5 opacity-90"
+          className="w-8 h-8"
         />
       </motion.div>
       

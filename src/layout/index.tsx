@@ -9,21 +9,10 @@ const Layout: React.FC<LayoutProps> = ({ children, logoPath }) => {
   return (
     <>
       <Navbar logoPath={logoPath} />
-      <motion.div
-              className="  inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0"
-              animate={{
-                opacity: [0, 0.3, 0],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-      <main>
+     
+      <main className='scroll-smooth'>
         {children}
       </main>
-      <motion.div/>
     </>
   );
 };

@@ -8,7 +8,7 @@ import { iPhoneLandingPageProps } from '../types';
 const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
   imagePath,
   imagePath2 = 'IphoneTras.png',
-  imagePath3 = 'cameraplus.png',
+  imagePath3 = 'phone3.png',
   rightBanner = 'rightbanner.png',
   leftBanner = 'leftbanner.png',
   mainBanner = 'mainbanner.png'
@@ -23,20 +23,17 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
     offset: ['start start', 'end end']
   });
   
-  // Efeito de parallax suavizado com useSpring
   const smoothScrollYProgress = useSpring(scrollYProgress, { 
     stiffness: 100, 
     damping: 30, 
-    restDelta: 0.001 
+    restDelta: 0.002 
   });
   
-  // Transformações aprimoradas para parallax
   const phoneY = useTransform(smoothScrollYProgress, [0, 1], [0, 300]);
   const phoneRotate = useTransform(smoothScrollYProgress, [0, 0.5, 1], [0, 15, 5]);
   const phoneScale = useTransform(smoothScrollYProgress, [0, 0.5, 1], [1, 1.2, 0.8]);
   const phoneOpacity = useTransform(smoothScrollYProgress, [0.8, 1], [1, 0.3]);
   
-  // Efeito de sombra dinâmica
   const phoneShadow = useTransform(
     smoothScrollYProgress,
     [0, 0.5, 1],
@@ -47,18 +44,15 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
     ]
   );
   
-  // Efeito de luz/brilho
   const highlightOpacity = useTransform(
     smoothScrollYProgress,
     [0, 0.3, 0.6, 1],
     [0, 0.8, 0.2, 0]
   );
   
-  // Rotação 3D
   const rotateX = useTransform(smoothScrollYProgress, [0, 0.5, 1], [0, 10, 5]);
   const rotateY = useTransform(smoothScrollYProgress, [0, 0.5, 1], [0, -15, -5]);
 
-  // Alternância automática de imagens
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -66,7 +60,7 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
     
     const imageInterval = setInterval(() => {
       setActiveImage((prev) => (prev + 1) % 3);
-    }, 3000);
+    }, 5000);
     
     return () => {
       clearTimeout(timer);
@@ -74,21 +68,18 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
     };
   }, []);
 
-  // Array de imagens
   const images = [imagePath, imagePath2, imagePath3];
   
-  // Efeito hover para destacar recursos da câmera
   const [hoverFeature, setHoverFeature] = useState<string | null>(null);
 
   return (
-    <div className="bg-black text-white antialiased">
+    <div className="bg-black text-white antialiased scroll-smooth">
       <Navbar logoPath="/apple-logo.svg" />
       
       <div 
         ref={containerRef}
-        className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden py-20"
+        className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden py-20 "
       >
-        {/* Efeito de luz de fundo */}
         <motion.div
           className="absolute w-full h-full"
           style={{ 
@@ -97,7 +88,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
           }}
         />
         
-        {/* Círculos de luz dinâmicos */}
         <motion.div
           className="absolute w-64 h-64 rounded-full bg-blue-500 filter blur-3xl"
           style={{ 
@@ -116,7 +106,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
           }}
         />
         
-        {/* Container do iPhone */}
         <motion.div
           ref={phoneRef}
           className="w-full max-w-lg mx-auto relative z-10"
@@ -135,7 +124,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
           }}
         >
           <div className="relative mx-auto w-full h-[500px] max-w-xs">
-            {/* Sombra/reflexo do iPhone */}
             <motion.div
               className="absolute inset-0 rounded-3xl transform rotate-12 scale-90 translate-y-4 blur-md"
               style={{ 
@@ -152,7 +140,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
               }}
             />
             
-            {/* Brilho na tela */}
             <motion.div
               className="absolute inset-0 rounded-3xl z-20 pointer-events-none"
               style={{
@@ -161,7 +148,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
               }}
             />
             
-            {/* Imagens do iPhone com transição */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeImage}
@@ -183,7 +169,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
               </motion.div>
             </AnimatePresence>
             
-            {/* Destaques de recursos */}
             {activeImage === 2 && (
               <>
                 <motion.div
@@ -194,7 +179,7 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
                   onHoverStart={() => setHoverFeature('camera')}
                   onHoverEnd={() => setHoverFeature(null)}
                 >
-                  <div className="bg-black bg-opacity-70 backdrop-blur-sm p-2 rounded-lg flex items-center space-x-2">
+                  <div className="bg-black bg-opacity-70 backdrop-blur-sm p-2 rounded-lg flex items-center space-x-2 animate-bounce">
                     <Camera size={16} className="text-blue-400" />
                     <span className="text-xs">Câmera dupla</span>
                   </div>
@@ -220,7 +205,7 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
                   onHoverStart={() => setHoverFeature('performance')}
                   onHoverEnd={() => setHoverFeature(null)}
                 >
-                  <div className="bg-black bg-opacity-70 backdrop-blur-sm p-2 rounded-lg flex items-center space-x-2">
+                  <div className="bg-black bg-opacity-70 backdrop-blur-sm p-2 rounded-lg flex items-center space-x-2 animate-bounce">
                     <Zap size={16} className="text-yellow-400" />
                     <span className="text-xs">Performance</span>
                   </div>
@@ -242,7 +227,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
           </div>
         </motion.div>
         
-        {/* Título com efeito */}
         <motion.div
           className="mt-12 text-center"
           style={{ 
@@ -284,7 +268,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
         </motion.div>
       </div>
       
-      {/* Indicador de scroll */}
       <motion.div
         className="fixed bottom-8 w-full flex justify-center pb-4 z-50"
         initial="hidden"
@@ -314,8 +297,6 @@ const iPhoneLandingPage: React.FC<iPhoneLandingPageProps> = ({
           <ChevronDown size={24} />
         </motion.button>
       </motion.div>
-      
-      {/* Segunda seção com banners */}
       <BannerSection
         rightBanner={rightBanner}
         leftBanner={leftBanner}
