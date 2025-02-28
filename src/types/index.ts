@@ -10,3 +10,15 @@ export interface LayoutProps {
   children: React.ReactNode;
   logoPath: string;
 }
+export interface NavbarProps {
+  logoPath: string;
+}
+
+
+export interface BannerSectionProps {
+  rightBanner: string;
+  leftBanner: string;
+  mainBanner: string;
+  soundWaveImage?: string;
+  phoneAudioImage?: string;
+}

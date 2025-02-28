@@ -1,25 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
+import { BannerSectionProps } from '../types';
 
-/**
- * Interface para definir as propriedades do componente BannerSection
- * @property {string} rightBanner - URL da imagem do banner direito
- * @property {string} leftBanner - URL da imagem do banner esquerdo
- * @property {string} mainBanner - URL da imagem do banner principal
- * @property {string} [soundWaveImage] - URL opcional da imagem de onda sonora
- * @property {string} [phoneAudioImage] - URL opcional da imagem do telefone com app de áudio
- */
-interface BannerSectionProps {
-  rightBanner: string;
-  leftBanner: string;
-  mainBanner: string;
-  soundWaveImage?: string;
-  phoneAudioImage?: string;
-}
 
-/**
- * Componente de seção de banner com efeitos parallax e animações interativas
- * Utiliza Framer Motion para criar uma experiência visual imersiva com base na posição de rolagem
+/** 
  * 
  * O componente é dividido em duas seções principais:
  * 1. Seção principal com banners de produto
@@ -96,7 +80,7 @@ const BannerSection: React.FC<BannerSectionProps> = ({
   });
   
   const smoothAudioProgress = useSpring(audioScrollProgress, { 
-    stiffness: 80,   // Rigidez um pouco menor para a seção de áudio (mais suave)
+    stiffness: 80,   // Rigidez rigidez menor para a seção de áudio (mais suave)
     damping: 25,     // Amortecimento para movimento fluido
     restDelta: 0.001
   });
@@ -260,9 +244,9 @@ const BannerSection: React.FC<BannerSectionProps> = ({
           ref={headerRef}
           className="text-center mb-16 px-4"
           style={{ 
-            opacity, // Fade in conforme rola
-            y: headerY, // Move para baixo conforme rola
-            scale: headerScale // Diminui levemente conforme rola
+            opacity, // Fade in conforme rolagem
+            y: headerY, // Move para baixo conforme rolagem
+            scale: headerScale // Diminui levemente conforme rolagem
           }}
         >
           <h2 className="text-3xl font-bold mb-4">Experiência incomparável</h2>
@@ -365,19 +349,19 @@ const BannerSection: React.FC<BannerSectionProps> = ({
                 alt="Right feature" 
                 className="w-full rounded-xl shadow-xl"
               />
-              
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 rounded-b-xl"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="text-lg font-bold mb-1">Performance incomparável</h3>
-                <p className="text-xs text-gray-300">
-                  Chip A13 Bionic para velocidade e eficiência.
-                </p>
-              </motion.div>
+                
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 rounded-b-xl"
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7, duration: 0.6 }}
+                        viewport={{ once: true }}
+                      >
+                      <h3 className="text-lg font-bold mb-1">Performance incomparável</h3>
+                      <p className="text-xs text-gray-300">
+                        Chip A13 Bionic para velocidade e eficiência.
+                      </p>
+                    </motion.div>
             </motion.div>
           </div>
           
@@ -538,7 +522,7 @@ const BannerSection: React.FC<BannerSectionProps> = ({
                 whileHover={{ 
                   scale: 1.05, // Aumenta levemente no hover
                   backgroundColor: "#F97316", // Cor mais vibrante no hover
-                  boxShadow: "0 0 15px rgba(249, 115, 22, 0.6)" // Efeito de brilho
+                  boxShadow: "0 0 5px rgba(249, 115, 22, 0.6)" // Efeito de brilho
                 }}
                 whileTap={{ scale: 0.98 }} // Comprime levemente ao clicar
                 transition={{ 
