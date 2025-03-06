@@ -231,7 +231,6 @@ const BannerSection: React.FC<BannerSectionProps> = ({
       );
     });
   };
-  
   return (
     <>
       {/* Seção principal com banners de produto */}
@@ -555,7 +554,11 @@ const BannerSection: React.FC<BannerSectionProps> = ({
                   )}
                 </motion.span>
                 {isPlaying ? "Pausar Demonstração" : "Play Demonstração"}
+                  
               </motion.button>
+              {/*Toca o som claramente do Iphone :)*/}
+              {isPlaying ? <audio src="hello-moto-sound-notification.mp3" autoPlay loop/> : undefined}
+
             </motion.div>
           </div>
           
