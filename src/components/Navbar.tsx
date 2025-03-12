@@ -4,16 +4,20 @@ import { Search, ShoppingBag, Menu, X } from 'lucide-react';
 import AnimatedMobileMenu from './AnimatedMobileMenu';
 import { NavbarProps } from '../types';
 import { fadeInVariants } from '../constants/animation';
+import { style } from 'framer-motion/client';
 
 
 
 const Navbar: React.FC<NavbarProps> = ({ logoPath = 'logo.png' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
+  const [isExpansed, setIsExpansed] = useState(false)
+  const toggleSearch = () => {
+    setIsExpansed(prevState => !prevState);
+  }
   const { scrollY } = useScroll();
   
-  const bgOpacity = useTransform(scrollY, [0,50, 100], [0.5, 0.8,   1]);
+  const bgOpacity = useTransform(scrollY, [0,50, 100], [0.5, 0.8,1]);
   const backdropBlur = useTransform(scrollY, [0, 100], [8, 12]);
   const height = useTransform(scrollY, [0, 100], ['64px', '54px']);
   
@@ -108,12 +112,25 @@ const Navbar: React.FC<NavbarProps> = ({ logoPath = 'logo.png' }) => {
           </motion.div>
 
       <div className="flex items-center space-x-5">
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <Search className="w-4 h-4 opacity-80 text-white hover:opacity-100 transition-opacity cursor-pointer" />
-        </motion.div>
+      <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={toggleSearch}
+    >
+      <Search className="w-4 h-4 opacity-80 text-white hover:opacity-100 transition-opacity cursor-pointer" />
+    </motion.button>
+
+    <motion.input
+      type="text"
+      placeholder="Buscar..."
+      className={`transition-all duration-300 ease-in-out pl-10 py-1 rounded-full border-1 border-white ${
+        isExpansed ? 'w-64 opacity-100' : 'w-0 opacity-0'
+        
+      }`
+    }
+    style={{visibility: isExpansed ? 'visible' : 'hidden'}}
+    />
+
         
         <motion.div
           whileHover={{ scale: 1.1 }}

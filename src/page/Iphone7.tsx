@@ -1,9 +1,10 @@
   import React, { useState, useEffect, useRef } from 'react';
   import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
   import { ChevronDown, Camera, Sparkles, Zap } from 'lucide-react';
-  import BannerSection from '../components/BannerSection';
-  import Navbar from '../components/Navbar';
   import { iPhoneLandingPageProps } from '../types';
+  import { lazy } from 'react';
+  const BannerSection = lazy(()=> import('../components/BannerSection'))
+
 
   /**
    * Componente principal da Landing Page do iPhone
@@ -181,11 +182,10 @@
     };
 
     return (
+    
       <div className="bg-black text-white antialiased scroll-smooth">
-        {/* Barra de navegação */}
-        <Navbar logoPath="/apple-logo.svg" />
-        
-        {/* Container principal com parallax */}
+
+   
         <div 
           ref={containerRef}  // Referência para monitorar o scroll
           className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden py-20"
@@ -418,10 +418,10 @@
               <motion.span 
                 className="inline-flex items-center ml-2"
                 animate={{ 
-                  color: ['#fff', '#3b82f6', '#fff'],  // Ciclo de cores: branco -> azul -> branco
+                  color: ['#fff', '#33caff', '#fff'],  // Ciclo de cores: branco -> azul -> branco
                 }}
                 transition={{
-                  duration: 5,          // Duração de 5s por ciclo
+                  duration: 2,          // Duração de 5s por ciclo
                   repeat: Infinity,     // Repete infinitamente
                   ease: 'easeInOut',    // Suavização nas extremidades
                 }}
@@ -492,7 +492,9 @@
           mainBanner={mainBanner}
         />
       </div>
+    
     );
+
   };
 
   export default iPhoneLandingPage;
