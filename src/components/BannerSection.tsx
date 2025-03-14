@@ -15,9 +15,9 @@ import { BannerSectionProps } from '../types';
  * - useTransform: Mapeia valores de progresso para propriedades de animação
  */
 const BannerSection: React.FC<BannerSectionProps> = ({
-  rightBanner,
-  leftBanner,
-  mainBanner,
+  rightBanner = '',
+  leftBanner = '',
+  mainBanner = '',
   soundWaveImage = 'soundWaveImage.png',
   phoneAudioImage = 'phoneAudioImage.png'
 }) => {

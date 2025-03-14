@@ -60,7 +60,7 @@
     // Escala do iPhone durante o scroll
     const phoneScale = useTransform(
       smoothScrollYProgress,
-      [0, 0.5, 1],           // Três pontos de controle
+      [0, 0.5, 1.2],           // Três pontos de controle
       [1, 1.2, 0.8]          // Escala: tamanho normal, aumenta 20% no meio, diminui 20% no fim
     );
     
@@ -133,7 +133,7 @@
           setTimeout(() => {
             setIsTransitioning(false);
           }, 1000); // Tempo total da transição (saída + entrada)
-        }, 7000); // Aumentado para 7 segundos para dar mais tempo para visualizar cada imagem
+        }, 5000); 
         
         // Limpeza do intervalo quando o componente é desmontado ou quando isTransitioning muda
         return () => clearInterval(imageInterval);
@@ -245,7 +245,7 @@
               perspective: 1000         // Profundidade da perspectiva 3D (em pixels)
             }}
           >
-            <div className="relative mx-auto w-full h-[500px] max-w-xs">
+            <div className="relative mx-auto w-full h-[800px] max-w-xs">
               {/* Sombra animada embaixo do iPhone */}
               <motion.div
                 className="absolute inset-0 rounded-3xl transform rotate-12 scale-90 translate-y-4 blur-md"
