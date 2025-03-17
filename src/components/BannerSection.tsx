@@ -3,17 +3,7 @@ import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-
 import { BannerSectionProps } from '../types';
 
 
-/** 
- * 
- * O componente é dividido em duas seções principais:
- * 1. Seção principal com banners de produto
- * 2. Seção de áudio com ondas sonoras e telefone (opcional, exibida apenas se soundWaveImage e phoneAudioImage forem fornecidos)
- * 
- * Cada seção implementa efeitos de parallax independentes usando hooks do Framer Motion:
- * - useScroll: Rastreia o progresso de rolagem
- * - useSpring: Adiciona física de mola para movimentos naturais
- * - useTransform: Mapeia valores de progresso para propriedades de animação
- */
+
 const BannerSection: React.FC<BannerSectionProps> = ({
   rightBanner = '',
   leftBanner = '',
@@ -167,11 +157,23 @@ const BannerSection: React.FC<BannerSectionProps> = ({
   const phoneRotateX = useTransform(smoothAudioProgress, [0, 0.5, 1], [10, 0, -5]);
   const phoneRotateY = useTransform(smoothAudioProgress, [0, 0.5, 1], [-5, 0, 3]);
   
-  /**
-   * Opacidade para partículas na seção principal
-   * As partículas ficam mais visíveis no meio da rolagem e desvanecem no início e fim
-   */
-  const particlesOpacity = useTransform(smoothProgress, [0, 0.3, 0.7, 1], [0, 0.6, 0.8, 0.4]);
+/**
+ * Controla a opacidade das partículas na seção principal conforme o progresso do scroll.
+ * 
+ * - `smoothProgress` varia de `0` (início da seção) a `1` (final da seção).
+ * - A opacidade das partículas é transformada ao longo deste intervalo para criar um efeito de transição suave, aumentando e diminuindo a visibilidade conforme o usuário rola.
+ * 
+ * O mapeamento dos valores funciona da seguinte forma:
+ * 
+ * 1. `0` → `0`: No início da rolagem (progresso `0`), as partículas começam invisíveis (opacidade `0`).
+ * 2. `0.3` → `0.6`: Quando o progresso chega a 30% (aproximadamente), as partículas começam a aparecer, com opacidade de `0.6` (não completamente visíveis).
+ * 3. `0.7` → `0.8`: Ao atingir 70% do progresso, as partículas ficam mais visíveis, com opacidade de `0.8` (quase totalmente visíveis).
+ * 4. `1` → `0.4`: Quando o progresso chega a 100% (fim da rolagem), as partículas começam a desaparecer novamente, com opacidade reduzida para `0.4`.
+ * 
+ * O objetivo desse mapeamento é criar um efeito de partículas que se tornam mais visíveis no meio da rolagem e desvanecem no início e no final, proporcionando uma sensação de suavidade e fluidez na interação.
+ */
+const particlesOpacity = useTransform(smoothProgress, [0, 0.3, 0.7, 1], [0, 0.6, 0.8, 0.4]);
+
   
   /**
    * Toggle play status - controla estado de reprodução de áudio
